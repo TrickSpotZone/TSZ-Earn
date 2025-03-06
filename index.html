@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monetag Ads in Telegram Mini App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            text-align: center;
+            background-color: #121212;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        #ad-container {
+            margin-top: 20px;
+            min-height: 50px; /* Space for the ad */
+        }
+        button {
+            background-color: #0088cc;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #006699;
+        }
+    </style>
+</head>
+<body>
+    <h2>Welcome to My Telegram Mini App</h2>
+
+    <!-- Show Ad Button -->
+    <button id="showAdBtn">Show Ad</button>
+
+    <!-- Ad Container -->
+    <div id="ad-container"></div>
+
+    <script>
+        // Initialize Telegram WebApp
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+
+        // Show Ad on Button Click
+        document.getElementById("showAdBtn").addEventListener("click", function () {
+            let adContainer = document.getElementById("ad-container");
+            adContainer.innerHTML = ""; // Clear previous ads
+
+            // Create and load the Monetag ad script dynamically
+            let script = document.createElement("script");
+            script.src = "//whephiwums.com/sdk.js";
+            script.setAttribute("data-zone", "9043910");
+            script.setAttribute("data-sdk", "show_9043910");
+            script.async = true;
+
+            adContainer.appendChild(script);
+        });
+    </script>
+</body>
+</html>
