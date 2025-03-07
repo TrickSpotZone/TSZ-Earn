@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,19 +18,11 @@
             background-color: #f4f4f9;
             color: #333;
         }
-        .header {
-            background-color: #4CAF50;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-            font-size: 26px;
-            border-bottom: 3px solid #fff;
-        }
         /* Section Styling */
         .earn-section {
             padding: 20px;
             max-width: 800px;
-            margin: 30px auto;
+            margin: 100px auto;
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -43,9 +36,6 @@
             font-weight: bold;
             margin-bottom: 15px;
             color: #4CAF50;
-        }
-        .tasks-info p {
-            margin-bottom: 8px;
         }
         .balance-info {
             background-color: #f9f9f9;
@@ -85,16 +75,9 @@
 </head>
 <body>
 
-    <div class="header">
-        <h2>Earn By Watching Ads</h2>
-    </div>
-
     <div class="earn-section">
         <div class="tasks-info">
-            <h3>Today's Tasks</h3>
-            <p><strong>Total Tasks:</strong> 0</p>
-            <p><strong>Completed:</strong> 0</p>
-            <p><strong>Remaining:</strong> 0</p>
+        <h3>Earn By Watching Ads</h3>
         </div>
 
         <form method="POST" id="taskForm">
@@ -102,7 +85,6 @@
             <button type="submit" class="complete-task-btn" id="completeTaskBtn" >
     Watch Ads</button>
         </form>
-        
 
         <script>
     document.getElementById('taskForm').addEventListener('submit', function(event) {
@@ -111,8 +93,8 @@
         let completeTaskBtn = document.getElementById("completeTaskBtn");
         let adWatchedInput = document.getElementById("adWatchedInput");
 
-        //         
-        let isEleventhTask = true;
+        // চেক করা হচ্ছে এটি ১১ নম্বর টাস্ক কি না
+        let isEleventhTask = false;
 
         if (isEleventhTask) {
             completeTaskBtn.innerText = "Click on Ad";
@@ -124,7 +106,7 @@
         if (typeof tszearn === 'function') {
             tszearn().then(() => {
                 if (isEleventhTask) {
-                    //             
+                    // ইউজার যদি ১১ নম্বর অ্যাড স্কিপ করে তাহলে ১৫ সেকেন্ডের টাইমার চালু হবে
                     alert("Wait 15 seconds");
                     let countdown = 15;
                     completeTaskBtn.innerText = "Wait " + countdown + "s...";
@@ -135,16 +117,20 @@
                             clearInterval(timer);
                             completeTaskBtn.innerText = "Task Completed!";
                             alert("Ad Watched Successfully!");
+                            adWatchedInput.value = "1";
+                            document.getElementById("taskForm").submit();
                         }
                     }, 1000);
                 } else {
-                    //        
+                    // সাধারণ টাস্কের জন্য ১৫ সেকেন্ড চেক করা হবে
                     let elapsed = (Date.now() - startTime) / 1000;
                     if (elapsed < 15) {
                         alert("Ad was closed before 15 seconds. Task not completed.");
                         completeTaskBtn.disabled = false;
                     } else {
                         alert("Ad Watched Successfully!");
+                        adWatchedInput.value = "1";
+                        document.getElementById("taskForm").submit();
                     }
                 }
             }).catch(() => {
@@ -159,9 +145,8 @@
 </script>
 
         <div class="balance-info">
-            <p><strong>Your Balance:</strong>  DOGS 0.00</p>
+            <p><strong>Your Balance:</strong> DOGS 0.00</p>
         </div>
     </div>
-
 </body>
 </html>
