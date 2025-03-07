@@ -3,62 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monetag Ads in Telegram Mini App</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <title>Earn By Watching Ads - Go Bot BD</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script src='//whephiwums.com/sdk.js' data-zone='9043910' data-sdk='tszearn'></script>
     <style>
+        /* Global Styling */
         body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .header {
+            background-color: #4CAF50;
+            color: #fff;
             text-align: center;
-            background-color: #121212;
-            color: white;
-            font-family: Arial, sans-serif;
+            padding: 20px;
+            font-size: 26px;
+            border-bottom: 3px solid #fff;
         }
-        #ad-container {
-            margin-top: 20px;
-            min-height: 50px; /* Space for the ad */
+        /* Section Styling */
+        .earn-section {
+            padding: 20px;
+            max-width: 800px;
+            margin: 30px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        button {
-            background-color: #0088cc;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 20px;
+        .tasks-info {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .tasks-info h3 {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #4CAF50;
+        }
+        .tasks-info p {
+            margin-bottom: 8px;
+        }
+        .balance-info {
+            background-color: #f9f9f9;
+            padding: 15px;
             border-radius: 5px;
+            margin-top: 20px;
+            text-align: center;
         }
-        button:hover {
-            background-color: #006699;
+        .complete-task-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        .complete-task-btn:hover {
+            background-color: #45a049;
+        }
+        .complete-task-btn:disabled {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .header { font-size: 22px; }
+            .earn-section { padding: 15px; }
+            .tasks-info h3 { font-size: 20px; }
+            .complete-task-btn { font-size: 16px; padding: 12px; }
+            .bottom-nav a { font-size: 16px; }
         }
     </style>
 </head>
 <body>
-    <h2>Welcome to My Telegram Mini App</h2>
 
-    <!-- Show Ad Button -->
-    <button id="showAdBtn">Show Ad</button>
+    <div class="header">
+        <h2>Earn By Watching Ads</h2>
+    </div>
 
-    <!-- Ad Container -->
-    <div id="ad-container"></div>
+    <div class="earn-section">
+        <div class="tasks-info">
+            <h3>Today's Tasks</h3>
+            <p><strong>Total Tasks:</strong> 0</p>
+            <p><strong>Completed:</strong> 0</p>
+            <p><strong>Remaining:</strong> 0</p>
+        </div>
 
-    <script>
-        // Initialize Telegram WebApp
-        let tg = window.Telegram.WebApp;
-        tg.expand();
+        <form method="POST" id="taskForm">
+            <input type="hidden" name="ad_watched" value="0" id="adWatchedInput">
+            <button type="submit" class="complete-task-btn" id="completeTaskBtn" >
+    Watch Ads</button>
+        </form>
+        
 
-        // Show Ad on Button Click
-        document.getElementById("showAdBtn").addEventListener("click", function () {
-            let adContainer = document.getElementById("ad-container");
-            adContainer.innerHTML = ""; // Clear previous ads
+        <script>
+    document.getElementById('taskForm').addEventListener('submit', function(event) {
+        event.preventDefault();
 
-            // Create and load the Monetag ad script dynamically
-            let script = document.createElement("script");
-            script.src = "//whephiwums.com/sdk.js";
-            script.setAttribute("data-zone", "9043910");
-            script.setAttribute("data-sdk", "show_9043910");
-            script.async = true;
+        let completeTaskBtn = document.getElementById("completeTaskBtn");
+        let adWatchedInput = document.getElementById("adWatchedInput");
 
-            adContainer.appendChild(script);
-        });
-    </script>
+        //         
+        let isEleventhTask = true;
+
+        if (isEleventhTask) {
+            completeTaskBtn.innerText = "Click on Ad";
+        }
+
+        completeTaskBtn.disabled = true;
+        let startTime = Date.now();
+
+        if (typeof tszearn === 'function') {
+            tszearn().then(() => {
+                if (isEleventhTask) {
+                    //             
+                    alert("Wait 15 seconds");
+                    let countdown = 15;
+                    completeTaskBtn.innerText = "Wait " + countdown + "s...";
+                    let timer = setInterval(() => {
+                        countdown--;
+                        completeTaskBtn.innerText = "Wait " + countdown + "s...";
+                        if (countdown <= 0) {
+                            clearInterval(timer);
+                            completeTaskBtn.innerText = "Task Completed!";
+                            alert("Ad Watched Successfully!");
+                        }
+                    }, 1000);
+                } else {
+                    //        
+                    let elapsed = (Date.now() - startTime) / 1000;
+                    if (elapsed < 15) {
+                        alert("Ad was closed before 15 seconds. Task not completed.");
+                        completeTaskBtn.disabled = false;
+                    } else {
+                        alert("Ad Watched Successfully!");
+                    }
+                }
+            }).catch(() => {
+                alert("Ad failed to load.");
+                completeTaskBtn.disabled = false;
+            });
+        } else {
+            alert("Ad function is not available.");
+            completeTaskBtn.disabled = false;
+        }
+    });
+</script>
+
+        <div class="balance-info">
+            <p><strong>Your Balance:</strong>  DOGS 0.00</p>
+        </div>
+    </div>
+
 </body>
 </html>
