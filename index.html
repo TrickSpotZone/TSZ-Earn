@@ -117,6 +117,7 @@
                             clearInterval(timer);
                             completeTaskBtn.innerText = "Task Completed!";
                             alert("Ad Watched Successfully!");
+                            location.reload();
 
                         }
                     }, 1000);
@@ -128,6 +129,7 @@
                         completeTaskBtn.disabled = false;
                     } else {
                         alert("Ad Watched Successfully!");
+                        location.reload();
                     }
                 }
             }).catch(() => {
@@ -140,10 +142,6 @@
         }
     });
 </script>
-
-        <div class="balance-info">
-            <p><strong>Your Balance:</strong> DOGS 0.00</p>
-        </div>
     </div>
 </body>
 </html>
