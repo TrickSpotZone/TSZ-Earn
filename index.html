@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="styles.css">
     <!-- Font Awesome CDN -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <script src='//whephiwums.com/sdk.js' data-zone='9043910' data-sdk='tszearn'></script>
+    <script src='//whephiwums.com/sdk.js' data-zone='9015524' data-sdk='tszearn'></script>
     <style>
         /* Global Styling */
         body {
@@ -117,8 +117,7 @@
                             clearInterval(timer);
                             completeTaskBtn.innerText = "Task Completed!";
                             alert("Ad Watched Successfully!");
-                            adWatchedInput.value = "1";
-                            document.getElementById("taskForm").submit();
+
                         }
                     }, 1000);
                 } else {
@@ -129,8 +128,6 @@
                         completeTaskBtn.disabled = false;
                     } else {
                         alert("Ad Watched Successfully!");
-                        adWatchedInput.value = "1";
-                        document.getElementById("taskForm").submit();
                     }
                 }
             }).catch(() => {
