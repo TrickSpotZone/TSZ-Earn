@@ -86,35 +86,12 @@
         let completeTaskBtn = document.getElementById("completeTaskBtn");
         let adWatchedInput = document.getElementById("adWatchedInput");
 
-        // চেক করা হচ্ছে এটি ১১ নম্বর টাস্ক কি না
-        let isEleventhTask = true;
-
-        if (isEleventhTask) {
-            completeTaskBtn.innerText = "Click on Ad";
-        }
 
         completeTaskBtn.disabled = true;
         let startTime = Date.now();
 
         if (typeof tszearn === 'function') {
             tszearn().then(() => {
-                if (isEleventhTask) {
-                    // ইউজার যদি ১১ নম্বর অ্যাড স্কিপ করে তাহলে ১৫ সেকেন্ডের টাইমার চালু হবে
-                    alert("Wait 15 seconds");
-                    let countdown = 15;
-                    completeTaskBtn.innerText = "Wait " + countdown + "s...";
-                    let timer = setInterval(() => {
-                        countdown--;
-                        completeTaskBtn.innerText = "Wait " + countdown + "s...";
-                        if (countdown <= 0) {
-                            clearInterval(timer);
-                            completeTaskBtn.innerText = "Task Completed!";
-                            alert("Ad Watched Successfully!");
-                            location.reload();
-
-                        }
-                    }, 1000);
-                } else {
                     // সাধারণ টাস্কের জন্য ১৫ সেকেন্ড চেক করা হবে
                     let elapsed = (Date.now() - startTime) / 1000;
                     if (elapsed < 15) {
@@ -124,7 +101,6 @@
                         alert("Ad Watched Successfully!");
                         location.reload();
                     }
-                }
             }).catch(() => {
                 alert("Ad failed to load.");
                 completeTaskBtn.disabled = false;
